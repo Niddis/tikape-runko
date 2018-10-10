@@ -7,9 +7,26 @@
     </head>
 
     <body>
-        <h1>Heippa vaan!</h1>
+        <h1>Kysymykset</h1>
+        
+        <ul>
+            <li th:each="kysymys : ${kysymykset}">
+                <span the:text="${kysymys.kurssi}"></span>
+            </li>
+        </ul>
+        
+        <h2>Lisää uusi kysymys</h2>
+        
+        <form method="POST" action="/">
+            Kurssi:
+            <input type="text" name="kurssi"/>
+            Aihe:
+            <input type="text" name="aihe"/>
+            Kysymysteksti:
+            <input type="text" name="kysymysteksti"/>
+            <input type="submit" value="Lisää kysymys"/>
+        </form>
 
-        <p>Ja .. <span th:text="${viesti}">jotain?</span></p>
 
         <p><a href="/opiskelijat">Tästä opiskelijalistaukseen.</a></p>
     </body>
