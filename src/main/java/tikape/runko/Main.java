@@ -10,7 +10,6 @@ import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.Database;
 import tikape.runko.database.KysymysDao;
-import tikape.runko.database.OpiskelijaDao;
 import tikape.runko.domain.Kysymys;
 
 public class Main {
@@ -24,7 +23,6 @@ public class Main {
         Database database = new Database("jdbc:sqlite:kysymyspankki.db");
         //database.init();
 
-        //OpiskelijaDao opiskelijaDao = new OpiskelijaDao(database);
         KysymysDao kysymysDao = new KysymysDao(database);
 
         Spark.get("/", (req, res) -> {
