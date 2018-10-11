@@ -12,7 +12,7 @@
         <ul>
             <li th:each="kysymys : ${kysymykset}">
                 Kurssi: 
-                <span th:text="${kysymys.kurssi}" th:href="${'/kysymykset/' + kysymys.getId}"><a th:href="${'/kysymykset/' + kysymys.getId}">kysymys</a></span><a th:href="${'/kysymykset/' + kysymys.getId}">linkki</a>
+                <span th:text="${kysymys.kurssi}" th:href="${'/kysymykset/' + kysymys.getId}"><a th:href="${'/kysymykset/' + kysymys.getId}">kysymys</a></span>
                 <form th:action="@{~/poista/{id}(id=${kysymys.getId})}" method="POST">
                     <input type="submit" value="Poista"/>
                 </form>
