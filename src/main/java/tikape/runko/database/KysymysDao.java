@@ -43,10 +43,10 @@ public class KysymysDao implements Dao<Kysymys, Integer>{
 
     @Override
     public Kysymys save(Kysymys object) throws SQLException {
-        Kysymys byName = findByName(object.getKysymysteksti());
+        /*Kysymys byName = findByName(object.getKysymysteksti());
         if (byName != null) {
             return byName;
-        }
+        }*/
         
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Kysymys (kurssi, aihe, kysymysteksti) VALUES (?, ?, ?)");
