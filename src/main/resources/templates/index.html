@@ -2,20 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Otsikko</title>
+        <title>Kysymyspankki</title>
         <meta charset="utf-8" />
     </head>
 
     <body>
-        <h1>Kysymykset</h1>
+        <h1>Kysymyspankki</h1>
         
         <ul>
             <li th:each="kysymys : ${kysymykset}">
-                Kurssi: 
-                <span th:text="${kysymys.kurssi}" th:href="${'/kysymykset/' + kysymys.getId}"><a th:href="${'/kysymykset/' + kysymys.getId}">kysymys</a></span>
-                <form th:action="@{~/poista/{id}(id=${kysymys.getId})}" method="POST">
+                Kurssi:
+                <span th:text="${kysymys.getKurssi}"></span><br/>
+                Aihe: 
+                <span th:text="${kysymys.getAihe}"></span><br/>
+                Kysymysteksti:
+                <a th:href="${'/kysymykset/' + kysymys.getId}"><span th:text="${kysymys.getKysymysteksti}">kysymys</span></a>
+                <form th:action="@{~/kysymys/poista/{id}(id=${kysymys.getId})}" method="POST">
                     <input type="submit" value="Poista"/>
-                </form>
+                </form><br />
             </li>
         </ul>
         

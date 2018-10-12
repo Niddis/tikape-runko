@@ -15,7 +15,17 @@ public class KysymysDao implements Dao<Kysymys, Integer>{
 
     @Override
     public Kysymys findOne(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection c = database.getConnection();
+        PreparedStatement s = c.prepareStatement("SELECT * FROM Kysymys WHERE id = ?");
+        s.setInt(1, key);
+        ResultSet r = s.executeQuery();
+        
+        if (!r.next()) {
+            return null;
+        }
+        
+        Kysymys k = new Kysymys(r.getInt("id"), r.getString("kurssi"), r.getString("aihe"), r.getString("kysymysteksti"));
+        return k;
     }
 
     @Override

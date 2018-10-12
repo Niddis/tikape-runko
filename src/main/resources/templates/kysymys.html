@@ -1,0 +1,51 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Kysymys</title>
+        <meta charset="UTF-8" />
+    </head>
+    
+    <body>
+        <h1>Hei vaan!</h1>
+        
+        <p>Kurssi: <span th:text="${kysymys.getKurssi}">kurssi</span></p>
+        <p>Aihe: <span th:text="${kysymys.getAihe}">aihe</span></p>
+        <p>Kysymys: <span th:text="${kysymys.getKysymysteksti}">kysymys</span></p>
+        
+        <h3>Väärät vastaukset</h3>
+        
+        <ul>
+            <li th:each="vastaus : ${vastaukset_vaarin}">
+                <span th:text="${vastaus.getVastausteksti}">kysymys</span>
+                <form th:action="@{~/vastaus/poista/{id}(id=${vastaus.getId})}" method="POST">
+                    <input type="submit" value="Poista"/>
+                </form><br />
+            </li>
+        </ul>
+        
+        <h3>Oikeat vastaukset</h3>
+        
+        <ul>
+            <li th:each="vastaus : ${vastaukset_oikein}">
+                <span th:text="${vastaus.getVastausteksti}">kysymys</span>
+                <form th:action="@{~/vastaus/poista/{id}(id=${vastaus.getId})}" method="POST">
+                    <input type="submit" value="Poista"/>
+                </form><br />
+            </li>
+        </ul>
+        
+        <h2>Luo uusi vastaus</h2>
+        
+        <form method="POST" th:action="@{~/kysymykset/{id}(id=${kysymys.getId})}">
+            Vastausteksti:
+            <input type="text" name="kysymysteksti"/><br/>
+            Vastaus on oikein:
+            <input type="checkbox" name="oikein" /><br/>
+            <input type="submit" value="Lisää vastaus"/>
+        </form>
+        
+        <a href="/"><p>Takaisin kysymyksiin</p></a>
+        
+    </body>
+</html>
