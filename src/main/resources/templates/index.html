@@ -9,6 +9,9 @@
     <body>
         <h1>Kysymyspankki</h1>
         
+        <p>Tervetuloa kysymyspankkiin! Tällä sivulla voit lisätä, poistaa ja tarkastella kysymyksiä.</p>
+        <p>Klikkaamalla kysymystä voit lisätä, poistaa ja tarkastella siihen liittyviä vastauksia.</p>
+        
         <ul>
             <li th:each="kysymys : ${kysymykset}">
                 Kurssi:
@@ -36,6 +39,5 @@
         </form>
 
 
-        <p><a href="/opiskelijat">Tästä opiskelijalistaukseen.</a></p>
     </body>
 </html>

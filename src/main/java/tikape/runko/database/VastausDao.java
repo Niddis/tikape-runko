@@ -3,7 +3,6 @@ package tikape.runko.database;
 
 import java.sql.*;
 import java.util.*;
-import tikape.runko.domain.Kysymys;
 import tikape.runko.domain.Vastaus;
 
 public class VastausDao implements Dao<Vastaus, Integer>{
@@ -15,7 +14,26 @@ public class VastausDao implements Dao<Vastaus, Integer>{
 
     @Override
     public Vastaus findOne(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection c = database.getConnection();
+        PreparedStatement s = c.prepareStatement("SELECT * FROM Vastaus WHERE id = ?");
+        s.setInt(1, key);
+        ResultSet r = s.executeQuery();
+        
+        if (!r.next()) {
+            return null;
+        }
+        
+        Vastaus v = new Vastaus(r.getInt("id"), r.getInt("kysymys_id"), r.getString("vastausteksti"), r.getBoolean("oikein"));
+        
+        r.close();
+        s.close();
+        c.close();
+        
+        return v;
+    }
+    
+    public Integer findKysymysId (Integer key) throws SQLException {
+        return findOne(key).getKysymys_id();
     }
 
     @Override
@@ -61,7 +79,7 @@ public class VastausDao implements Dao<Vastaus, Integer>{
             stmt.executeUpdate();
         }
 
-        return null;
+        return object;
     }
 
     @Override

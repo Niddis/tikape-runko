@@ -62,9 +62,12 @@ public class Main {
         Spark.post("/kysymykset/:id", (req, res) -> {
             Integer id = Integer.parseInt(req.params(":id"));
             //Integer kysymysId = Integer.parseInt(req.queryParams("kysymys_id"));
-            
-            vastausDao.save(new Vastaus(-1, id, req.queryParams("vastausteksti"), false));
-            res.redirect("/kysymys");
+            Boolean oikein = false;
+            if (req.queryParams("oikein").equals("on")) {
+                oikein = true;
+            }
+            vastausDao.save(new Vastaus(-1, id, req.queryParams("vastausteksti"), oikein));
+            res.redirect("/kysymykset/" + id);
             return"";
         });
         
@@ -76,9 +79,11 @@ public class Main {
         });
         
         Spark.post("/vastaus/poista/:id", (req, res) -> {
-            vastausDao.delete(Integer.parseInt(req.params(":id")));
+            Integer id = Integer.parseInt(req.params(":id"));
+            Integer kysymysId = vastausDao.findKysymysId(id);
+            vastausDao.delete(id);
             
-            res.redirect("/");
+            res.redirect("/kysymykset/" + kysymysId);
             return "";
         });
     }

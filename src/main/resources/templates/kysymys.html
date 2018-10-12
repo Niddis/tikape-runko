@@ -7,11 +7,11 @@
     </head>
     
     <body>
-        <h1>Hei vaan!</h1>
+        <h1><span th:text="${kysymys.getKysymysteksti}">Kysymys</span></h1>
         
         <p>Kurssi: <span th:text="${kysymys.getKurssi}">kurssi</span></p>
         <p>Aihe: <span th:text="${kysymys.getAihe}">aihe</span></p>
-        <p>Kysymys: <span th:text="${kysymys.getKysymysteksti}">kysymys</span></p>
+
         
         <h3>Väärät vastaukset</h3>
         
@@ -39,9 +39,9 @@
         
         <form method="POST" th:action="@{~/kysymykset/{id}(id=${kysymys.getId})}">
             Vastausteksti:
-            <input type="text" name="kysymysteksti"/><br/>
+            <input type="text" name="vastausteksti"/><br/>
             Vastaus on oikein:
-            <input type="checkbox" name="oikein" /><br/>
+            <input type="checkbox" name="oikein"/><br/>
             <input type="submit" value="Lisää vastaus"/>
         </form>
         

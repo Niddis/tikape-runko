@@ -25,6 +25,11 @@ public class KysymysDao implements Dao<Kysymys, Integer>{
         }
         
         Kysymys k = new Kysymys(r.getInt("id"), r.getString("kurssi"), r.getString("aihe"), r.getString("kysymysteksti"));
+        
+        r.close();
+        s.close();
+        c.close();
+        
         return k;
     }
 
