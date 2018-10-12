@@ -48,6 +48,8 @@ public class KysymysDao implements Dao<Kysymys, Integer>{
     @Override
     public void delete(Integer key) throws SQLException {
         Connection c = database.getConnection();
+        PreparedStatement st = c.prepareStatement("DELETE FROM Vastaus WHERE kysymys_id = ?");
+        st.setInt(1, key);
         PreparedStatement s = c.prepareStatement("DELETE FROM Kysymys WHERE id = ?");
         s.setInt(1, key);
         s.executeUpdate();
