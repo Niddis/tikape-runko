@@ -27,7 +27,7 @@ public class Main {
 
         KysymysDao kysymysDao = new KysymysDao(database);
         VastausDao vastausDao = new VastausDao(database);
-
+        
         Spark.get("/", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("kysymykset", kysymysDao.findAll());
@@ -62,10 +62,14 @@ public class Main {
         Spark.post("/kysymykset/:id", (req, res) -> {
             Integer id = Integer.parseInt(req.params(":id"));
             //Integer kysymysId = Integer.parseInt(req.queryParams("kysymys_id"));
+            
             Boolean oikein = false;
             if (req.queryParams("oikein").equals("on")) {
                 oikein = true;
+            } else if (req.queryParams("oikein") == null) {
+                oikein = false;
             }
+            
             vastausDao.save(new Vastaus(-1, id, req.queryParams("vastausteksti"), oikein));
             res.redirect("/kysymykset/" + id);
             return"";
