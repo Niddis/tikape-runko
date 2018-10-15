@@ -64,10 +64,8 @@ public class Main {
             //Integer kysymysId = Integer.parseInt(req.queryParams("kysymys_id"));
             
             Boolean oikein = false;
-            if (req.queryParams("oikein").equals("on")) {
+            if (req.queryParams("oikein") != null) {
                 oikein = true;
-            } else if (req.queryParams("oikein") == null) {
-                oikein = false;
             }
             
             vastausDao.save(new Vastaus(-1, id, req.queryParams("vastausteksti"), oikein));
